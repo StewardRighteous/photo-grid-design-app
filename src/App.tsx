@@ -4,7 +4,16 @@ import GridBoard from "./GridBoard";
 export default function App() {
   const [images, setImages] = useState<string[]>([]);
   const [showGridBoard, setShowGridBoard] = useState<boolean>(false);
-  
+  const [dragIndex, setDragIndex] = useState<number | null>(null);
+
+  const reorderImages = (from: number, to: number) => {
+    setImages((prev) => {
+      const updated = [...prev];
+      const [moved] = updated.splice(from, 1);
+      updated.splice(to, 0, moved);
+      return updated;
+    });
+  };
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -64,9 +73,26 @@ export default function App() {
       {!showGridBoard && (
         <div className="flex gap-1 w-2xl md:w-3xl lg:w-4xl flex-wrap">
           {images.map((img, index) => (
-            <div key={index} className="flex flex-col gap-1">
-              <img src={img} className="size-40 object-contain" />
-              <button className="border border-black text-red-500" onClick={() => deleteImage(index)}>Delete</button>
+            <div
+              key={index}
+              className="flex flex-col gap-1 cursor-move"
+              draggable
+              onDragStart={() => setDragIndex(index)}
+              onDragOver={(e) => e.preventDefault()}
+              onDrop={() => {
+                if (dragIndex !== null && dragIndex !== index) {
+                  reorderImages(dragIndex, index);
+                }
+                setDragIndex(null);
+              }}
+            >
+              <img src={img} className="size-40 object-contain border" />
+              <button
+                className="border border-black text-red-500"
+                onClick={() => deleteImage(index)}
+              >
+                Delete
+              </button>
             </div>
           ))}
         </div>
