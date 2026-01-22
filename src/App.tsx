@@ -53,7 +53,7 @@ export default function App() {
         id="files-select"
         className="hidden"
       />
-      {images.length >= 25 && (
+      {images.length >= 25 && !showGridBoard && (
         <button
           className="bg-blue-600 w-90 p-2 text-white rounded-3xl font-mono"
           onClick={() => setShowGridBoard(true)}
