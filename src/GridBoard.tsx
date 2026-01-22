@@ -51,6 +51,7 @@ export default function GridBoard({ images }: GridBoardProps) {
       >
         Print Board
       </button>
+      {rotatedImages.length < 25 && <div className="loader"></div>}
       {rotatedImages.length >= 25 && (
         <div
           className="flex h-[324mm] w-[224mm] border-[1pt] justify-center items-center relative"
