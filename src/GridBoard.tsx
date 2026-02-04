@@ -15,7 +15,7 @@ export default function GridBoard({ images }: GridBoardProps) {
     documentTitle: "photo-grid",
     pageStyle: `
       @page {
-        size: 224mm 324mm;
+        size: 223mm 324.6mm;
         margin: 0;
       }
     `,
