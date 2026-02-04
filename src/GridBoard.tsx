@@ -54,7 +54,7 @@ export default function GridBoard({ images }: GridBoardProps) {
       {rotatedImages.length < 25 && <div className="loader"></div>}
       {rotatedImages.length >= 25 && (
         <div
-          className="flex h-[324mm] w-[224mm] border-[1pt] justify-center items-center relative"
+          className="flex h-[324.6mm] w-[223mm] border-[1pt] justify-center items-center relative"
           ref={contentRef}
         >
           <div className="size-3 bg-black absolute left-1 top-1 "></div>
