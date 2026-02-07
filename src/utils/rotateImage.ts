@@ -12,7 +12,7 @@ export async function rotateImage(
     outputType = "base64",
     mimeType = "image/png",
     quality = 1,
-  }: RotateImageOptions
+  }: RotateImageOptions,
 ): Promise<string | Blob> {
   const image = await loadImage(src);
 
@@ -38,7 +38,7 @@ export async function rotateImage(
 
   if (outputType === "blob") {
     return new Promise((resolve) =>
-      canvas.toBlob((blob) => resolve(blob!), mimeType, quality)
+      canvas.toBlob((blob) => resolve(blob!), mimeType, quality),
     );
   }
 

@@ -15,7 +15,7 @@ export default function GridBoard({ images }: GridBoardProps) {
     documentTitle: "photo-grid",
     pageStyle: `
       @page {
-        size: 223mm 324.6mm;
+        size: 228mm 329.6mm;
         margin: 0;
       }
     `,
@@ -46,7 +46,7 @@ export default function GridBoard({ images }: GridBoardProps) {
   return (
     <>
       <button
-        className="bg-blue-600 w-90 p-2 text-white rounded-3xl font-mono"
+        className="w-90 rounded-3xl bg-blue-600 p-2 font-mono text-white"
         onClick={reactToPrintFn}
       >
         Print Board
@@ -54,23 +54,30 @@ export default function GridBoard({ images }: GridBoardProps) {
       {rotatedImages.length < 25 && <div className="loader"></div>}
       {rotatedImages.length >= 25 && (
         <div
-          className="flex h-[324.6mm] w-[223mm] border-[1pt] justify-center items-center relative"
+          className="flex h-[329.6mm] w-[228mm] items-center justify-center border border-dashed"
           ref={contentRef}
         >
-          <div className="size-3 bg-black absolute left-1 top-1 "></div>
-          <div className="grid grid-cols-5 gap-[2.5mm]">
-            {rotatedImages.map((img, index) => (
-              <div key={index} className="flex flex-col justify-center">
-                <img
-                  src={img}
-                  className="object-contain relative z-1 w-[37.75mm] h-[53mm]"
-                />
-                <img
-                  src={img}
-                  className=" blur-sm absolute z-0 w-[37.75mm] h-[53mm]"
-                />
-              </div>
-            ))}
+          <div className="relative flex h-[324.6mm] w-[223mm] items-center justify-center">
+            <div className="absolute top-0 right-0 size-20 border-t-2 border-r-2"></div>
+            <div className="absolute bottom-0 left-0 size-20 border-b-2 border-l-2"></div>
+            <div className="absolute top-0 left-0 size-5 bg-black"></div>
+            <div className="grid grid-cols-5 gap-[2.5mm]">
+              {rotatedImages.map((img, index) => (
+                <div
+                  key={index}
+                  className="relative flex h-[53mm] w-[37.75mm] flex-col items-center justify-center overflow-hidden"
+                >
+                  <img
+                    src={img}
+                    className="absolute inset-0 h-full w-full object-cover blur-sm"
+                  />
+                  <img
+                    src={img}
+                    className="relative h-full w-full object-contain"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
